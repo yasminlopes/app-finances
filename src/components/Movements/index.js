@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { AnimatePresence, MotiText } from 'moti';
 
 
 export default function Movements({ data }) {
@@ -17,9 +18,14 @@ export default function Movements({ data }) {
         <Text style={styles.label}>{data.label}</Text>
 
         {showValue ? (
-          <Text style={data.type === 1 ? styles.value : styles.expenses}>
+         <AnimatePresence exitBeforeEnter>
+           <MotiText
+          style={data.type === 1 ? styles.value : styles.expenses}
+          from={{ translateX: 100 }} animate={{ translateX: 0 }} transition={{ type: 'timing', duration: 500 }}
+          >
             {data.type === 1 ? `R$ ${data.value}` : `R$ -${data.value}`}
-          </Text>
+          </MotiText>
+         </AnimatePresence>
         ) : (
           <Text>
             <Feather name="eye" size={24} color="#aaaa" />

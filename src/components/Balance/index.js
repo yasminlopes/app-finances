@@ -1,3 +1,4 @@
+import { MotiView } from 'moti';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -11,7 +12,22 @@ export default function Balance({ items}) {
   };
 
   return (
-    <View style={styles.container}>
+    <MotiView
+    style={styles.container}
+    from={{
+      rotateX: '-100deg',
+      opacity: 0
+    }}
+    animate={{
+      rotateX: '0deg',
+      opacity: 1
+    }}
+    transition={{
+      type: 'timing',
+      delay: 300,
+      duration: 900
+    }}
+    >
       {items.map((item, index) => (
         <View key={index} style={styles.item}>
           <Text style={styles.itemTitle}>{item.title}</Text>
@@ -23,7 +39,7 @@ export default function Balance({ items}) {
 
         </View>
       ))}
-    </View>
+    </MotiView>
   );
 }
 
